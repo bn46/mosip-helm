@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: artifactory
+  namespace: artifactory
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/bn46/artiactory
+    path: charts/artiactory
+    targetRevision: develop  # Specify the desired tag here
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: my-app
+  syncPolicy:
+    automated:
+      prune: true

@@ -52,8 +52,10 @@ service:
 ## with biosdk 'develop' version.  TODO: Change this later
 image:
   registry: docker.io
-  repository: mosipqa/artifactory-server
+  repository: bn46/artifacts
   tag: develop
+  SHA_256: 
+
   ## Specify a imagePullPolicy
   ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
   ## ref: http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
