@@ -54,7 +54,6 @@ image:
   registry: docker.io
   repository: bn46/artifacts
   tag: develop
-  sha256id: bn1997/artifacts@sha256:2c6d633d054bac4f2dc532c966abbbaca5f7a2144a42d7dfbe0eda52769fdbb1
 
   ## Specify a imagePullPolicy
   ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
