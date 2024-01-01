@@ -53,7 +53,7 @@ service:
 image:
   registry: docker.io
   repository: bn46/artifacts
-  tag: develop
+  tag: fed22030a170a771c4fb79909f1cbec860b93221
 
   ## Specify a imagePullPolicy
   ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
@@ -312,7 +312,7 @@ volumePermissions:
   image:
     registry: docker.io
     repository: bitnami/bitnami-shell
-    tag: "10"
+    tag: fed22030a170a771c4fb79909f1cbec860b93221
     pullPolicy: Always
     ## Optionally specify an array of imagePullSecrets.
     ## Secrets must be manually created in the namespace.
