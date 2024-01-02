@@ -52,7 +52,7 @@ service:
 ## with biosdk 'develop' version.  TODO: Change this later
 image:
   registry: docker.io
-  repository: bn1997/artifacts
+  repository: bn1997/artifactory-server
   tag: main
 
   ## Specify a imagePullPolicy
