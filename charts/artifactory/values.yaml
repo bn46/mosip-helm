@@ -53,7 +53,7 @@ service:
 image:
   registry: docker.io
   repository: bn1997/artifacts
-  tag: develop
+  tag: main
 
   ## Specify a imagePullPolicy
   ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
