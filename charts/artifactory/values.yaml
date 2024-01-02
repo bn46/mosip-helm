@@ -52,9 +52,8 @@ service:
 ## with biosdk 'develop' version.  TODO: Change this later
 image:
   registry: docker.io
-  repository: bn46/artifacts
+  repository: bn1997/artifacts
   tag: develop
-  sha256:
 
   ## Specify a imagePullPolicy
   ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
