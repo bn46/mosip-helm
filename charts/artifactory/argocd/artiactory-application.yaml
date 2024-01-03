@@ -1,17 +1,52 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
   name: artifactory
-  namespace: artifactory
+  namespace: argocd
 spec:
-  project: default
-  source:
-    repoURL: https://github.com/bn46/artiactory
-    path: charts/artiactory
-    targetRevision: develop  # Specify the desired tag here
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: my-app
-  syncPolicy:
-    automated:
-      prune: true
+  generators:
+  - pullRequest:
+      github:
+        labels:
+        - {{ $v.label }}
+        owner: {{ $v.owner }}
+        repo: {{ $v.app_repo }}
+        tokenRef:
+          key: {{ $v.webhook_secret_key }}
+          secretName: {{ $v.webhook_secret }}
+  template:
+    metadata:
+      annotations:
+        argocd-image-updater.argoproj.io/image-list: docker.io/bn1997/artifactory-server:main
+        argocd-image-updater.argoproj.io/update-strategy: digest
+      name: '{{"{{"}}branch{{"}}"}}-{{"{{"}}number{{"}}"}}'
+    spec:
+      destination:
+        namespace: argocd
+        server: https://kubernetes.default.svc
+      project: {{ $v.project }}
+      source:
+        helm:
+          parameters:
+          - name: environment
+            value: staging
+          - name: image.pullPolicy
+            value: Always
+          - forceString: true
+            name: image.name
+            value: docker.io/bn1997/artifactory-server
+          - forceString: true
+            name: image.tag
+            value: main
+        path: charts/artiactory/
+        repoURL: https://github.com/bn46/artiactory
+        targetRevision: develop
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+        - CreateNamespace=true
+{{- end }}
