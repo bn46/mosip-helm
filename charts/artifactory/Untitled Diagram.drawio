@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2024-01-07T12:52:22.837Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" etag="jYmfS4DxNFQaGfibXIkQ" version="22.1.17" type="github">
+<mxfile host="app.diagrams.net" modified="2024-01-07T12:55:52.167Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" etag="42ozegrWDVAT_lPPpL1Q" version="22.1.17" type="github">
   <diagram name="Page-1" id="cBbhvXb9hvGF_H_bD6u9">
     <mxGraphModel dx="1366" dy="689" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -46,8 +46,8 @@
         <mxCell id="GIl-5HGIxEuM8NQa49To-14" value="&lt;b style=&quot;&quot;&gt;ArgoCD Image Updator&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontColor=#000000;" vertex="1" parent="1">
           <mxGeometry x="860" y="260" width="150" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="GIl-5HGIxEuM8NQa49To-15" value="Checking new images in &lt;b&gt;Google Artifact Registry&lt;/b&gt; for each branch and inform &lt;b&gt;ArgoCD server &lt;/b&gt;to deploy new docker image version" style="text;html=1;resizable=0;autosize=1;align=center;verticalAlign=middle;points=[];fillColor=none;strokeColor=none;rounded=0;fontColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="595" y="240" width="720" height="20" as="geometry" />
+        <mxCell id="GIl-5HGIxEuM8NQa49To-15" value="Checking new images in &lt;b&gt;Docker registry&lt;/b&gt;&amp;nbsp;for each branch and inform &lt;b&gt;ArgoCD server &lt;/b&gt;to deploy new docker image version" style="text;html=1;resizable=0;autosize=1;align=center;verticalAlign=middle;points=[];fillColor=none;strokeColor=none;rounded=0;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="620" y="235" width="670" height="30" as="geometry" />
         </mxCell>
         <mxCell id="GIl-5HGIxEuM8NQa49To-16" value="" style="endArrow=classic;html=1;rounded=0;fontColor=#000000;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" target="GIl-5HGIxEuM8NQa49To-4">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
