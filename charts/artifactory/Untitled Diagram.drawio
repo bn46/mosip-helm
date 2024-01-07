@@ -1,9 +1,98 @@
-<mxfile host="app.diagrams.net" modified="2024-01-07T12:39:11.731Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" version="22.1.17" etag="b4aH_Dqp4MmKSHrDf6mO" type="github">
+<mxfile host="app.diagrams.net" modified="2024-01-07T12:48:08.797Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" etag="roxwh_bR3AEKXhDFW2fA" version="22.1.17" type="github">
   <diagram name="Page-1" id="cBbhvXb9hvGF_H_bD6u9">
-    <mxGraphModel>
+    <mxGraphModel dx="1366" dy="689" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
+        <mxCell id="GIl-5HGIxEuM8NQa49To-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="GIl-5HGIxEuM8NQa49To-4" target="GIl-5HGIxEuM8NQa49To-24">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="GIl-5HGIxEuM8NQa49To-4" value="&lt;b&gt;ArgoCD Server&lt;/b&gt;" style="aspect=fixed;perimeter=ellipsePerimeter;html=1;align=center;shadow=0;dashed=0;spacingTop=3;image;image=img/lib/active_directory/internet_cloud.svg;" vertex="1" parent="1">
+          <mxGeometry x="940" y="408.5" width="50" height="31.5" as="geometry" />
+        </mxCell>
+        <mxCell id="GIl-5HGIxEuM8NQa49To-6" value="&lt;b&gt;Devloper or QA&lt;/b&gt;" style="verticalLabelPosition=bottom;html=1;verticalAlign=top;align=center;strokeColor=none;fillColor=#00BEF2;shape=mxgraph.azure.laptop;pointerEvents=1;" vertex="1" parent="1">
+          <mxGeometry x="480" y="608.5" width="50" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="GIl-5HGIxEuM8NQa49To-7" value="&lt;b&gt;git clone https://github.com/orgname/appservice.git &amp;amp;&amp;amp; cd&amp;nbsp;&lt;/b&gt;&lt;b&gt;appservice&lt;/b&gt;&lt;b&gt;&lt;br&gt;git checkout EXISTING-BRANCH-1000&lt;br&gt;git checkout -b existing-branch-1000&lt;br&gt;git push origin&amp;nbsp;&lt;/b&gt;&lt;b&gt;existing-branch-1000&lt;/b&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;" style="text;html=1;resizable=0;autosize=1;align=center;verticalAlign=middle;points=[];fillColor=none;strokeColor=none;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="550" y="598.5" width="410" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="GIl-5HGIxEuM8NQa49To-8" value="Note: &lt;b&gt;Branch name must be with lower case&lt;/b&gt;" style="text;html=1;resizable=0;autosize=1;align=center;verticalAlign=middle;points=[];fillColor=none;strokeColor=none;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="595" y="658.5" width="270" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="GIl-5HGIxEuM8NQa49To-9" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="505" y="408.5" as="sourcePoint" />
+            <mxPoint x="505" y="280" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GIl-5HGIxEuM8NQa49To-10" value="Create new Pull Request to &lt;b&gt;Main &lt;/b&gt;branch from&amp;nbsp;&lt;b&gt;existing-branch-1000 &lt;/b&gt;with label &lt;b&gt;&lt;font color=&quot;#ff00ff&quot;&gt;preview&lt;br&gt;&lt;/font&gt;&lt;/b&gt;It will trigger ArgoCD to create new application with stye &lt;b&gt;&lt;font color=&quot;#7f00ff&quot;&gt;branchname-prnumber&lt;/font&gt;&lt;font color=&quot;#ff00ff&quot;&gt;&lt;br&gt;&lt;/font&gt;&lt;/b&gt;" style="text;html=1;resizable=0;autosize=1;align=center;verticalAlign=middle;points=[];fillColor=none;strokeColor=none;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="320" y="463.5" width="480" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="GIl-5HGIxEuM8NQa49To-11" value="" style="endArrow=classic;html=1;rounded=0;fontColor=#FF00FF;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="GIl-5HGIxEuM8NQa49To-6">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="500" y="608.5" as="sourcePoint" />
+            <mxPoint x="505" y="439.9999999999998" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GIl-5HGIxEuM8NQa49To-12" value="&lt;b&gt;artifactory&lt;/b&gt;&amp;nbsp;&lt;font color=&quot;#000000&quot;&gt;will be triggered to create new docker image push it to Docker Artifact Registry&lt;/font&gt;" style="text;html=1;resizable=0;autosize=1;align=center;verticalAlign=middle;points=[];fillColor=none;strokeColor=none;rounded=0;fontColor=#7F00FF;" vertex="1" parent="1">
+          <mxGeometry x="325" y="383.5" width="500" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="GIl-5HGIxEuM8NQa49To-13" value="" style="endArrow=classic;html=1;rounded=0;fontColor=#000000;entryX=1;entryY=0.75;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="GIl-5HGIxEuM8NQa49To-14">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="860" y="358.5" as="sourcePoint" />
+            <mxPoint x="527.4639363660706" y="271.1619804203293" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GIl-5HGIxEuM8NQa49To-14" value="&lt;b style=&quot;&quot;&gt;ArgoCD Image Updator&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="860" y="260" width="150" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="GIl-5HGIxEuM8NQa49To-15" value="Checking new images in &lt;b&gt;Google Artifact Registry&lt;/b&gt; for each branch and inform &lt;b&gt;ArgoCD server &lt;/b&gt;to deploy new docker image version" style="text;html=1;resizable=0;autosize=1;align=center;verticalAlign=middle;points=[];fillColor=none;strokeColor=none;rounded=0;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="595" y="240" width="720" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="GIl-5HGIxEuM8NQa49To-16" value="" style="endArrow=classic;html=1;rounded=0;fontColor=#000000;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" target="GIl-5HGIxEuM8NQa49To-4">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="529.9999999999939" y="424.2499999999998" as="sourcePoint" />
+            <mxPoint x="900" y="428.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GIl-5HGIxEuM8NQa49To-17" value="" style="endArrow=classic;html=1;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.75;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="GIl-5HGIxEuM8NQa49To-14" target="GIl-5HGIxEuM8NQa49To-4">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="950" y="338.5" as="sourcePoint" />
+            <mxPoint x="1000" y="288.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GIl-5HGIxEuM8NQa49To-18" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.25;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="GIl-5HGIxEuM8NQa49To-14">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="750" y="348.5" as="sourcePoint" />
+            <mxPoint x="526.6093137491496" y="416.3300816113551" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GIl-5HGIxEuM8NQa49To-19" value="&lt;div&gt;If new commit will come inside of branch &lt;b&gt;&lt;font color=&quot;#0000ff&quot;&gt;existing-branch-1000&lt;/font&gt;&lt;/b&gt; then, new docker image will be&amp;nbsp;&lt;/div&gt;&lt;div&gt;created in &lt;u&gt;Docker registry&lt;/u&gt;&amp;nbsp;which, will be pulled back by &lt;b&gt;ArgoCD Image Updater&lt;/b&gt; to&lt;/div&gt;&lt;div&gt;inform &lt;b&gt;&lt;font color=&quot;#0000cc&quot;&gt;existing-branch-1000&lt;/font&gt;&lt;/b&gt; applications in &lt;b&gt;ArgoCD&lt;/b&gt; update image to new one&lt;/div&gt;" style="text;html=1;resizable=0;autosize=1;align=center;verticalAlign=middle;points=[];fillColor=none;strokeColor=none;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="555" y="525" width="530" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="GIl-5HGIxEuM8NQa49To-20" value="&lt;div&gt;&lt;font color=&quot;#000000&quot;&gt;&lt;b&gt;PR&lt;/b&gt; already created and when new commit comes to &lt;b&gt;branch &lt;/b&gt;of PR, &lt;b&gt;cloudbuild.yaml&lt;/b&gt; file triggers again to push new image to the&amp;nbsp;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font color=&quot;#000000&quot;&gt;&lt;u&gt;Google Artifact Regisrty&lt;/u&gt;(&lt;b&gt;GAR&lt;/b&gt;). &lt;b&gt;ArgoCD Image Updater&lt;/b&gt; scans &lt;b&gt;GAR&lt;/b&gt; to detect &lt;u&gt;each imahe changes of each branches&lt;/u&gt;. If it happens,&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font color=&quot;#000000&quot;&gt;it is going to push changes back to &lt;/font&gt;&lt;u style=&quot;color: rgb(0, 0, 0);&quot;&gt;helm charts repo&lt;/u&gt; &lt;b style=&quot;&quot;&gt;https://github.com/orgname/argocd&lt;/b&gt;&lt;font color=&quot;#000000&quot;&gt; under microservice folder. For example,&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font color=&quot;#000000&quot;&gt;if we create new PR from branch &lt;/font&gt;&lt;b style=&quot;color: rgb(0, 0, 0);&quot;&gt;applicationset &lt;/b&gt;&lt;font color=&quot;#000000&quot;&gt;with PR number &lt;/font&gt;&lt;b style=&quot;color: rgb(0, 0, 0);&quot;&gt;11&lt;/b&gt;&lt;font color=&quot;#000000&quot;&gt; of &lt;/font&gt;&lt;b style=&quot;&quot;&gt;https://github.com/orgname/appservice&lt;/b&gt;&lt;font color=&quot;#000000&quot;&gt; repository, then it is&amp;nbsp;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font color=&quot;#000000&quot;&gt;going to create new file with style &lt;b&gt;.argocd-source-applicationset-11.yaml&lt;/b&gt;, with content of &lt;u&gt;helm parameters with image tag&lt;/u&gt; which&amp;nbsp;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font color=&quot;#000000&quot;&gt;got from &lt;/font&gt;&lt;b style=&quot;color: rgb(0, 0, 0);&quot;&gt;GAR&lt;/b&gt;&lt;font color=&quot;#000000&quot;&gt; and push to the &lt;/font&gt;&lt;b style=&quot;&quot;&gt;https://github.com/orgname/argocd&lt;/b&gt;&lt;font color=&quot;#000000&quot;&gt; repository &lt;/font&gt;&lt;b style=&quot;color: rgb(0, 0, 0);&quot;&gt;main&lt;/b&gt;&lt;font color=&quot;#000000&quot;&gt; branch.&lt;/font&gt;&lt;/div&gt;" style="text;html=1;resizable=0;autosize=1;align=center;verticalAlign=middle;points=[];fillColor=none;strokeColor=none;rounded=0;fontColor=#0000CC;" vertex="1" parent="1">
+          <mxGeometry x="610" y="150" width="730" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="GIl-5HGIxEuM8NQa49To-22" value="State of &lt;b&gt;argocd&lt;/b&gt; application will be written to &lt;b&gt;review-apps&lt;/b&gt;&amp;nbsp;and&lt;b&gt;devops-preview-apps&amp;nbsp;&lt;/b&gt;&lt;br&gt;slack channels" style="text;html=1;resizable=0;autosize=1;align=center;verticalAlign=middle;points=[];fillColor=none;strokeColor=none;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="1050" y="270.5" width="470" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="GIl-5HGIxEuM8NQa49To-23" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="GIl-5HGIxEuM8NQa49To-24">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1274.81" y="345" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GIl-5HGIxEuM8NQa49To-24" value="&lt;b style=&quot;&quot;&gt;ArgoCD Notifications Controller&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="1150" y="414.25" width="190" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="GIl-5HGIxEuM8NQa49To-25" value="" style="image;sketch=0;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/mscae/Docker.svg;" vertex="1" parent="1">
+          <mxGeometry x="470" y="229.5" width="50" height="41" as="geometry" />
+        </mxCell>
+        <mxCell id="GIl-5HGIxEuM8NQa49To-26" value="" style="dashed=0;outlineConnect=0;html=1;align=center;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;shape=mxgraph.weblogos.github" vertex="1" parent="1">
+          <mxGeometry x="480" y="408.5" width="50" height="43.25" as="geometry" />
+        </mxCell>
+        <mxCell id="GIl-5HGIxEuM8NQa49To-27" value="" style="shape=image;html=1;verticalAlign=top;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;imageAspect=0;aspect=fixed;image=https://cdn2.iconfinder.com/data/icons/social-media-2285/512/1_Slack_colored_svg-128.png" vertex="1" parent="1">
+          <mxGeometry x="1260" y="310" width="30" height="30" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
