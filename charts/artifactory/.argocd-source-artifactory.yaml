@@ -4,5 +4,5 @@ helm:
     value: docker.io/bn1997/artifactory-server
     forcestring: true
   - name: image.tag
-    value: main@sha256:2f57994fa0daee006b4817c274b3c98dfbf8bdad15d8ca8e793305994767b200
+    value: main@sha256:c2fcd139313496cea0acdc141624a4701c9fbee7ab8211190e768bb6bd0bfd4f
     forcestring: true
