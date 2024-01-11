@@ -1,8 +1,0 @@
-helm:
-  parameters:
-  - name: image.name
-    value: docker.io/bn1997/artifactory-server
-    forcestring: true
-  - name: image.tag
-    value: main@sha256:1b26cd6bc0b19105daa1143b6cd5f328e5ee446367c329456075c193b451950e
-    forcestring: true
