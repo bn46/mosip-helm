@@ -1,8 +1,8 @@
 helm:
   parameters:
   - name: image.name
-    value: docker.io/bn1997/artifactory-server
+    value: docker.io/mosipid/config-server
     forcestring: true
   - name: image.tag
-    value: main@sha256:f909c47fbf4af567f84be5ef0ad4b6588bc528ac0b4c12b0b6adb1fde4b9d315
+    value: 1.1.2@sha256:bc5ce50037d8988f807db45ee0fb19a750f6d0b17487155fca7edad0892e7eb0
     forcestring: true
