@@ -662,7 +662,8 @@ envVariables:
         name: conf-secrets-various
         key: mosip-partner-crypto-p12-password
     enabled: true
-
+rbac:
+  create: true
 
 ## The active profile env if you have another set of properties. Correspondingly, properties in Git repo will
 ## have names of type "*-default.properties"
