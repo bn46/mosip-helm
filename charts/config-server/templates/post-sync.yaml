@@ -1,29 +1,36 @@
-# post-install.yaml
-apiVersion: batch/v1
+apiVersion: batch/v1beta1
 kind: Job
 metadata:
-  name: copy-configmaps
+  name: copy-configmaps-and-secrets
   namespace: {{ .Release.Namespace }}
   annotations:
-    argocd.argoproj.io/hook: post-sync
+    helm.sh/hook: post-install
 spec:
   template:
     metadata:
-      name: copy-configmaps
+      name: copy-configmaps-and-secrets
     spec:
-      restartPolicy: Never
       containers:
-      - name: copy-configmaps
-        image: alpine:latest
+      - name: copy-configmaps-and-secrets
+        image: bitnami/kubectl:latest
         command:
         - /bin/sh
         - -c
         - |
           for mapping in "global default" "keycloak-host keycloak" "activemq-activemq-artemis-share activemq" "s3 s3" "msg-gateways msg-gateways"; do
             source_namespace=$(echo $mapping | cut -d' ' -f1)
-            configmap=$(echo $mapping | cut -d' ' -f2)
-            kubectl get configmap $configmap -n $source_namespace -o yaml \
-              | sed "s/$source_namespace\/$configmap/target-namespace\/$configmap/" \
-              | kubectl apply -f -
-          done          # Add more lines for additional ConfigMaps if needed
+            resource=$(echo $mapping | cut -d' ' -f2)
+            if kubectl get configmap $resource -n $source_namespace &> /dev/null; then
+              kubectl get configmap $resource -n $source_namespace -o yaml \
+                | sed "s/$source_namespace\/$resource/config-server\/$resource/" \
+                | kubectl apply -f -
+            elif kubectl get secret $resource -n $source_namespace &> /dev/null; then
+              kubectl get secret $resource -n $source_namespace -o yaml \
+                | sed "s/$source_namespace\/$resource/config-server\/$resource/" \
+                | kubectl apply -f -
+            else
+              echo "Resource type not recognized for $resource in $source_namespace"
+            fi
+          done
+          # Add more lines for additional ConfigMaps or Secrets if needed
       restartPolicy: Never
