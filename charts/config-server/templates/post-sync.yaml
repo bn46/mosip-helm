@@ -1,0 +1,29 @@
+# post-install.yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: copy-configmaps
+  namespace: {{ .Release.Namespace }}
+  annotations:
+    argocd.argoproj.io/hook: post-sync
+spec:
+  template:
+    metadata:
+      name: copy-configmaps
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: copy-configmaps
+        image: alpine:latest
+        command:
+        - /bin/sh
+        - -c
+        - |
+          for mapping in "global default" "keycloak-host keycloak" "activemq-activemq-artemis-share activemq" "s3 s3" "msg-gateways msg-gateways"; do
+            source_namespace=$(echo $mapping | cut -d' ' -f1)
+            configmap=$(echo $mapping | cut -d' ' -f2)
+            kubectl get configmap $configmap -n $source_namespace -o yaml \
+              | sed "s/$source_namespace\/$configmap/target-namespace\/$configmap/" \
+              | kubectl apply -f -
+          done          # Add more lines for additional ConfigMaps if needed
+      restartPolicy: Never
