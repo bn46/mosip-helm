@@ -4,7 +4,7 @@ metadata:
   name: configmap-secret-copier-binding
 subjects:
 - kind: ServiceAccount
-  name: {{ include "config-server.serviceAccountName" . }} # Replace with your SA name
+  name: config-server
   namespace: {{ .Release.Namespace }}   # Replace with the namespace where the SA is created
 roleRef:
   kind: ClusterRole
