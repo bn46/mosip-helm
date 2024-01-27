@@ -5,7 +5,7 @@ metadata:
   namespace: {{ .Release.Namespace }}
 subjects:
   - kind: ServiceAccount
-    name: {{ include "config-server.serviceAccountName" . }}
+    name: config-server
     namespace: {{ .Release.Namespace }}
 roleRef:
   kind: Role
