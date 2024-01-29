@@ -33,30 +33,43 @@ spec:
         - /bin/bash
         - -c
         - |
-          # ConfigMaps mapping
-          for mapping in "default global" "activemq activemq-activemq-artemis-share" "s3 s3" "msg-gateways msg-gateways" "keycloak keycloak-host"; do
-            source_namespace=$(echo $mapping | cut -d' ' -f1)
-            resource=$(echo $mapping | cut -d' ' -f2)
+          #!/bin/bash
+          # Copy configmaps and secrets from other namespaces
+          # DST_NS: Destination namespace
 
-            if kubectl get configmap $resource -n $source_namespace &> /dev/null; then
-              kubectl get configmap $resource -n $source_namespace -o yaml \
-                | sed "s/$source_namespace\/$resource/testingconfig\/$resource/" \
-                | kubectl apply -f -
+          function copy_resource() {
+            RESOURCE_TYPE=$1
+            RESOURCE_NAME=$2
+            SOURCE_NS=$3
+            DEST_NS=$4
+            NEW_NAME=$5
+
+            RESOURCE=$RESOURCE_TYPE
+
+            if [ -n "$NEW_NAME" ]; then
+              kubectl -n $DEST_NS delete --ignore-not-found=true $RESOURCE $NEW_NAME
+              kubectl -n $SOURCE_NS get $RESOURCE $RESOURCE_NAME -o yaml | \
+                sed "s/namespace: $SOURCE_NS/namespace: $DEST_NS/g" | \
+                sed "s/name: $RESOURCE_NAME/name: $NEW_NAME/g" | \
+                kubectl -n $DEST_NS create -f -
             else
-              echo "ConfigMap not found for $resource in $source_namespace"
+              kubectl -n $DEST_NS delete --ignore-not-found=true $RESOURCE $RESOURCE_NAME
+              kubectl -n $SOURCE_NS get $RESOURCE $RESOURCE_NAME -o yaml | \
+                sed "s/namespace: $SOURCE_NS/namespace: $DEST_NS/g" | \
+                kubectl -n $DEST_NS create -f -
             fi
-          done
+          }
 
-          # Secrets mapping
-          for mapping in "postgres db-common-secrets" "keycloak keycloak" "keycloak keycloak-client-secrets" "activemq activemq-activemq-artemis" "softhsm softhsm-kernel" "softhsm softhsm-ida" "s3 s3" "msg-gateways msg-gateways" "captcha mosip-captcha" "conf-secrets conf-secrets-various"; do
-            source_namespace=$(echo $mapping | cut -d' ' -f1)
-            resource=$(echo $mapping | cut -d' ' -f2)
+          function copying_resources() {
+            DST_NS=onboarder
 
-            if kubectl get secret $resource -n $source_namespace &> /dev/null; then
-              kubectl get secret $resource -n $source_namespace -o yaml \
-                | sed "s/$source_namespace\/$resource/testingconfig\/$resource/" \
-                | kubectl apply -f -
-            else
-              echo "Secret not found for $resource in $source_namespace"
-            fi
-          done
+            copy_resource configmap global default $DST_NS
+            copy_resource configmap keycloak-env-vars keycloak $DST_NS
+            copy_resource configmap keycloak-host keycloak $DST_NS
+
+            copy_resource secret s3 s3 $DST_NS
+            copy_resource secret keycloak keycloak $DST_NS
+            copy_resource secret keycloak-client-secrets keycloak $DST_NS
+
+            return 0
+          }
