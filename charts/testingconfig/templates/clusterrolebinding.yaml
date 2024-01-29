@@ -4,7 +4,7 @@ metadata:
   name: configmap-secret-copier-binding
   annotations:
     "helm.sh/hook": pre-install
-    "helm.sh/hook-weight": "4"
+    "helm.sh/hook-weight": "-3"
     "helm.sh/resource-policy": keep
 subjects:
 - kind: ServiceAccount
