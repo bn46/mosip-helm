@@ -52,7 +52,7 @@ spec:
                 exit 1
               fi
 
-              if [ -n "$NEW_NAME" ]; then
+              if [ "$NEW_NAME" != "$RESOURCE_NAME" ]; then
                 kubectl -n "$DESTINATION_NAMESPACE" delete --ignore-not-found=true "$RESOURCE" "$NEW_NAME"
                 kubectl -n "$SOURCE_NAMESPACE" get "$RESOURCE" "$RESOURCE_NAME" -o yaml | \
                   sed "s/namespace: $SOURCE_NAMESPACE/namespace: $DESTINATION_NAMESPACE/g" | \
