@@ -27,7 +27,7 @@ spec:
       restartPolicy: Never
       containers:
       - name: post-install-job
-        image: "bitnami/kubectl:1.22.9"
+        image: bitnami/kubectl:1.22.9
         command:
         - /bin/bash
         - -c
@@ -41,7 +41,7 @@ spec:
               local RESOURCE_NAME="$2"
               local SOURCE_NAMESPACE="$3"
               local DESTINATION_NAMESPACE="$4"
-              local NEW_NAME="$5"
+              local NEW_NAME="${5:-$RESOURCE_NAME}" 
 
               if [ "$RESOURCE_TYPE" = "configmap" ]; then
                 RESOURCE="configmap"
