@@ -11,7 +11,7 @@ metadata:
   annotations:
     # This is what defines this resource as a hook. Without this line, the
     # job is considered part of the release.
-    "helm.sh/hook": post-install
+    "helm.sh/hook": pre-install
     "helm.sh/hook-weight": "-5"
     "helm.sh/hook-delete-policy": hook-succeeded
 spec:
@@ -24,6 +24,7 @@ spec:
         app.kubernetes.io/instance: {{.Release.Name | quote }}
         helm.sh/chart: "{{.Chart.Name}}-{{.Chart.Version}}"
     spec:
+      serviceAccountName: default
       restartPolicy: Never
       containers:
       - name: post-install-job

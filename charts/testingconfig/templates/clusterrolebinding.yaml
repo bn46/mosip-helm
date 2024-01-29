@@ -4,7 +4,7 @@ metadata:
   name: configmap-secret-copier-binding
 subjects:
 - kind: ServiceAccount
-  name: testingconfig
+  name: default
   namespace: {{ .Release.Namespace }}   # Replace with the namespace where the SA is created
 roleRef:
   kind: ClusterRole
