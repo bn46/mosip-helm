@@ -2,7 +2,11 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   name: configmap-secret-copier
-  namespace: {{ .Release.Namespace }}  
+  namespace: {{ .Release.Namespace }}
+  annotations:
+    "helm.sh/hook": pre-install
+    "helm.sh/hook-weight": "4"
+    "helm.sh/resource-policy": keep
 rules:
 - apiGroups: [""]
   resources: ["configmaps", "secrets"]
