@@ -32,30 +32,66 @@ spec:
         - /bin/bash
         - -c
         - |
-          # ConfigMaps mapping
-          for mapping in "default global" "activemq activemq-activemq-artemis-share" "s3 s3" "msg-gateway msg-gateways" "keycloak keycloak-host"; do
-            source_namespace=$(echo $mapping | cut -d' ' -f1)
-            resource=$(echo $mapping | cut -d' ' -f2)
+            #!/bin/bash
+            # Copy configmaps and secrets from other namespaces
 
-            if kubectl get configmap $resource -n $source_namespace &> /dev/null; then
-              kubectl get configmap $resource -n $source_namespace -o yaml \
-                | sed 's/namespace: $source_namespace/namespace: testingconfig/' \
-                | kubectl apply -f -
-            else
-              echo "ConfigMap not found for $resource in $source_namespace"
-            fi
-          done
+            # Function to copy ConfigMaps or Secrets
+            function copy_resource() {
+              local RESOURCE_TYPE="$1"
+              local RESOURCE_NAME="$2"
+              local SOURCE_NAMESPACE="$3"
+              local DESTINATION_NAMESPACE="$4"
+              local NEW_NAME="$5"
 
-          # Secrets mapping
-          for mapping in "postgres db-common-secrets" "keycloak keycloak" "keycloak keycloak-client-secrets" "activemq activemq-activemq-artemis" "softhsm softhsm-kernel" "softhsm softhsm-ida" "s3 s3" "msg-gateway msg-gateways" "captcha mosip-captcha" "conf-secrets conf-secrets-various"; do
-            source_namespace=$(echo $mapping | cut -d' ' -f1)
-            resource=$(echo $mapping | cut -d' ' -f2)
+              if [ "$RESOURCE_TYPE" = "configmap" ]; then
+                RESOURCE="configmap"
+              elif [ "$RESOURCE_TYPE" = "secret" ]; then
+                RESOURCE="secret"
+              else
+                echo "Incorrect resource type: $RESOURCE_TYPE. Exiting..."
+                exit 1
+              fi
 
-            if kubectl get secret $resource -n $source_namespace &> /dev/null; then
-              kubectl get secret $resource -n $source_namespace -o yaml \
-                | sed 's/namespace: $source_namespace/namespace: testingconfig/' \
-                | kubectl apply -f -
-            else
-              echo "Secret not found for $resource in $source_namespace"
-            fi
-          done
+              if [ -n "$NEW_NAME" ]; then
+                kubectl -n "$DESTINATION_NAMESPACE" delete --ignore-not-found=true "$RESOURCE" "$NEW_NAME"
+                kubectl -n "$SOURCE_NAMESPACE" get "$RESOURCE" "$RESOURCE_NAME" -o yaml | \
+                  sed "s/namespace: $SOURCE_NAMESPACE/namespace: $DESTINATION_NAMESPACE/g" | \
+                  sed "s/name: $RESOURCE_NAME/name: $NEW_NAME/g" | kubectl -n "$DESTINATION_NAMESPACE" create -f -
+              else
+                kubectl -n "$DESTINATION_NAMESPACE" delete --ignore-not-found=true "$RESOURCE" "$RESOURCE_NAME"
+                kubectl -n "$SOURCE_NAMESPACE" get "$RESOURCE" "$RESOURCE_NAME" -o yaml | \
+                  sed "s/namespace: $SOURCE_NAMESPACE/namespace: $DESTINATION_NAMESPACE/g" | \
+                  kubectl -n "$DESTINATION_NAMESPACE" create -f -
+              fi
+            }
+
+            # Function to copy multiple ConfigMaps and Secrets
+            function copy_resources() {
+              # Copy ConfigMaps
+              copy_resource "configmap" "global" "default" "{{ .Release.Namespace }}"
+              copy_resource "configmap" "keycloak-host" "keycloak" "{{ .Release.Namespace }}"
+              copy_resource "configmap" "activemq-activemq-artemis-share" "activemq" "{{ .Release.Namespace }}"
+              copy_resource "configmap" "s3" "s3" "{{ .Release.Namespace }}"
+              copy_resource "configmap" "msg-gateway" "msg-gateways" "{{ .Release.Namespace }}"
+
+              # Copy Secrets
+              copy_resource "secret" "db-common-secrets" "postgres" "{{ .Release.Namespace }}"
+              copy_resource "secret" "keycloak" "keycloak" "{{ .Release.Namespace }}"
+              copy_resource "secret" "keycloak-client-secrets" "keycloak" "{{ .Release.Namespace }}"
+              copy_resource "secret" "activemq-activemq-artemis" "activemq" "{{ .Release.Namespace }}"
+              copy_resource "secret" "softhsm-kernel" "softhsm" "{{ .Release.Namespace }}"
+              copy_resource "secret" "softhsm-ida" "softhsm" "{{ .Release.Namespace }}"
+              copy_resource "secret" "s3" "s3" "{{ .Release.Namespace }}"
+              copy_resource "secret" "msg-gateway" "msg-gateways" "{{ .Release.Namespace }}"
+              copy_resource "secret" "mosip-captcha" "captcha" "{{ .Release.Namespace }}"
+              copy_resource "secret" "conf-secrets-various" "conf-secrets" "{{ .Release.Namespace }}"
+            }
+
+            # Error handling settings
+            set -e
+            set -o errexit
+            set -o nounset
+            set -o errtrace
+            set -o pipefail
+
+            copy_resources
