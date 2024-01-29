@@ -27,7 +27,7 @@ spec:
       restartPolicy: Never
       containers:
       - name: post-install-job
-        image: "bitnami/kubectl:1.22.9"
+        image: "bn1997/kubectl:1.22.9"
         command:
         - /bin/bash
         - -c
