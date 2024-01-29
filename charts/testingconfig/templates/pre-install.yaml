@@ -41,7 +41,7 @@ spec:
             if kubectl get configmap $resource -n $source_namespace &> /dev/null; then
               kubectl get configmap $resource -n $source_namespace -o yaml \
                 | sed "s/$source_namespace\/$resource/testingconfig\/$resource/" \
-                | kubectl apply -f -
+                | kubectl create -f -
             else
               echo "ConfigMap not found for $resource in $source_namespace"
             fi
@@ -55,7 +55,7 @@ spec:
             if kubectl get secret $resource -n $source_namespace &> /dev/null; then
               kubectl get secret $resource -n $source_namespace -o yaml \
                 | sed "s/$source_namespace\/$resource/testingconfig\/$resource/" \
-                | kubectl apply -f -
+                | kubectl create -f -
             else
               echo "Secret not found for $resource in $source_namespace"
             fi
